@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PC Selection - CAD POINT</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .marquee {
+      background: linear-gradient(90deg, #ff6600, #ff9900);
+      color: white;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .scroll-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 10s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .pc-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .pc-card p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .select-btn,
+    .order-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .order-btn {
+      background-color: #007bff;
+    }
+
+    .order-btn:hover,
+    .select-btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="marquee">
+    <div class="scroll-text">
+      CAD POINT - Jewellery Designing Institute Andheri East
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="pc-card" data-details='{"Processor":"i5","Generation":"6th Gen","SSD":"256 Internal Storage","RAM":"8 GB","Brand":"Lenovo","Monitor":"18.5 Inch + Keyboard Mouse","Price":16500}'>
+      <p><strong>Processor:</strong> i5</p>
+      <p><strong>Generation:</strong> 6th Gen</p>
+      <p><strong>SSD:</strong> 256 Internal Storage</p>
+      <p><strong>RAM:</strong> 8 GB</p>
+      <p><strong>Brand:</strong> Lenovo</p>
+      <p><strong>Monitor:</strong> 18.5 Inch + Keyboard Mouse</p>
+      <p><strong>Price:</strong> ₹16,500</p>
+      <button class="select-btn" onclick="selectPC(this)">Select</button>
+    </div>
+
+    <div class="pc-card" data-details='{"Processor":"i5","Generation":"6th Gen","SSD":"256 Internal Storage","RAM":"8 GB","Brand":"Dell","Monitor":"18.5 Inch + Keyboard Mouse","Price":18500}'>
+      <p><strong>Processor:</strong> i5</p>
+      <p><strong>Generation:</strong> 6th Gen</p>
+      <p><strong>SSD:</strong> 256 Internal Storage</p>
+      <p><strong>RAM:</strong> 8 GB</p>
+      <p><strong>Brand:</strong> Dell</p>
+      <p><strong>Monitor:</strong> 18.5 Inch + Keyboard Mouse</p>
+      <p><strong>Price:</strong> ₹18,500</p>
+      <button class="select-btn" onclick="selectPC(this)">Select</button>
+    </div>
+
+    <div class="pc-card" data-details='{"Processor":"i5","Generation":"6th Gen","SSD":"256 Internal Storage","RAM":"8 GB","Brand":"Dell","Monitor":"24 Inch Lapcare + Keyboard Mouse","Price":22500}'>
+      <p><strong>Processor:</strong> i5</p>
+      <p><strong>Generation:</strong> 6th Gen</p>
+      <p><strong>SSD:</strong> 256 Internal Storage</p>
+      <p><strong>RAM:</strong> 8 GB</p>
+      <p><strong>Brand:</strong> Dell</p>
+      <p><strong>Monitor:</strong> 24 Inch Lapcare + Keyboard Mouse</p>
+      <p><strong>Price:</strong> ₹22,500</p>
+      <button class="select-btn" onclick="selectPC(this)">Select</button>
+    </div>
+  </div>
+
+  <script>
+    function selectPC(btn) {
+      // Remove any existing order buttons
+      document.querySelectorAll(".order-btn").forEach(el => el.remove());
+
+      const card = btn.parentElement;
+      const data = JSON.parse(card.getAttribute('data-details'));
+      const detailsText = `Processor: ${data.Processor}\nGeneration: ${data.Generation}\nSSD: ${data.SSD}\nRAM: ${data.RAM}\nBrand: ${data.Brand}\nMonitor: ${data.Monitor}\nPrice: ₹${data.Price}`;
+
+      const orderBtn = document.createElement("button");
+      orderBtn.className = "order-btn";
+      orderBtn.innerText = "Order Now";
+      orderBtn.onclick = function () {
+        const msg = `I want to order the following PC:\n${detailsText}`;
+        const url = `https://wa.me/9136615110?text=${encodeURIComponent(msg)}`;
+        window.open(url, "_blank");
+      };
+
+      card.appendChild(orderBtn);
+    }
+  </script>
+</body>
+</html>
